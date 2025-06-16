@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SewaAja - Keranjang</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Bootstrap Bundle with Popper (harus!) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body class="bg-gray-100 font-poppins">
     <!-- Navbar -->
@@ -49,32 +54,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="border-b border-gray-200">
-                                <td class="p-2 flex items-center space-x-2">
-                                    <img src="https://placehold.co/51x40" alt="Paket 1" class="w-12 h-10">
-                                    <div>
-                                        <p class="text-base font-semibold">Paket 1</p>
-                                        <p class="text-xs text-gray-600">Rp 75.000 /hari</p>
-                                    </div>
-                                </td>
-                                <td class="p-2">
-                                    <span class="px-3 py-1 bg-gray-200 rounded text-sm">2 hari</span>
-                                </td>
-                                <td class="p-2">
-                                    <div class="flex items-center space-x-2">
-                                        <button class="w-6 h-6 bg-gray-200 rounded-full flex items-center justify-center">-</button>
-                                        <span class="text-sm">2</span>
-                                        <button class="w-6 h-6 bg-gray-200 rounded-full flex items-center justify-center">+</button>
-                                    </div>
-                                </td>
-                                <td class="p-2 text-sm font-semibold">Rp 300.000</td>
-                                <td class="p-2">
-                                    <button class="text-blue-600 hover:underline">Edit</button>
-                                    <div></div>
-                                    <button class="text-red-600 hover:underline">Hapus</button>
-                                    
-                                </td>
-                            </tr>
+                           
                         @forelse($items as $item)
                         <?php
                             if (!$item->barang) {
@@ -122,24 +102,41 @@
                             </td>
                             <td class="p-2">
                                 <div class="flex items-center space-x-2">
-                                    <button class="w-6 h-6 bg-gray-200 rounded-full flex items-center justify-center" onclick="updateQuantity({{ $item->id }}, {{ $item->qty - 1 }})">-</button>
+                                    {{-- <button class="w-6 h-6 bg-gray-200 rounded-full flex items-center justify-center" onclick="updateQuantity({{ $item->id }}, {{ $item->qty - 1 }})">-</button> --}}
                                     <span class="text-sm">{{ $item->qty }}</span>
-                                    <button class="w-6 h-6 bg-gray-200 rounded-full flex items-center justify-center" onclick="updateQuantity({{ $item->id }}, {{ $item->qty + 1 }})">+</button>
+                                    {{-- <button class="w-6 h-6 bg-gray-200 rounded-full flex items-center justify-center" onclick="updateQuantity({{ $item->id }}, {{ $item->qty + 1 }})">+</button> --}}
                                 </div>
                             </td>
                             <td class="p-2 text-sm font-semibold">Rp {{ number_format($item->barang->harga_per_hari * $days * $item->qty, 0, ',', '.') }}</td>
                             <td class="p-2">
                                     <div class="flex space-x-2">
-                                        <button class="text-blue-600 hover:text-blue-800" data-bs-toggle="modal" data-bs-target="#editModal">
+                                        <button class="text-blue-600 hover:text-blue-800"  data-bs-toggle="modal" 
+                                        data-bs-target="#editModal"
+                                        data-id="{{ $item->id }}"
+                                        data-qty="{{ $item->qty }}"
+                                        data-start="{{ $item->start_date }}"
+                                        data-end="{{ $item->end_date }}">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                                             </svg>
                                         </button>
-                                        <button class="text-red-600 hover:text-red-800">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                            </svg>
-                                        </button>
+                                        <form action="{{ route('cart.delete', $item->id) }}" method="POST" class="inline delete-form">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="button" class="text-red-600 hover:text-red-800" onclick="confirmDelete(event, {{ $item->id }})">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                </svg>
+                                            </button>
+                                        </form>
+
+                                        <script>
+                                        function confirmDelete(event, id) {
+                                            if (confirm('Apakah Anda yakin ingin menghapus item ini dari keranjang?')) {
+                                                event.target.closest('.delete-form').submit();
+                                            }
+                                        }
+                                        </script>
                                     </div>
                             </td>
                         </tr>
@@ -235,62 +232,60 @@
             </div>
         </div>
     </footer>
-    <div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="flex justify-between items-center mb-4">
-                <h3 class="text-xl font-bold">Edit Item</h3>
-                {{-- <button onclick="closeEditModal()" class="text-gray-500 hover:text-gray-700">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button> --}}
-            </div>
-            
-            <form id="editItemForm" class="space-y-4" action="{{ route('cart.update', {{$item->}}) }}" method="POST">
-                @csrf
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Confirm Delete</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+    <!-- Edit Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <form method="POST" id="editForm" action="{{ route('cart.update') }}">
+            @csrf
+            <input type="hidden" name="id" id="idItem">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Item</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label>Quantity</label>
+                        <input type="number" name="qty" class="form-control" id="editQty">
                     </div>
-                    <div class="modal-body">
-                        Are you sure you want to delete this item?
+                    <div class="mb-3">
+                        <label>Start Date</label>
+                        <input type="date" name="start_date" class="form-control" id="editStartDate">
                     </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <div class="mb-3">
+                        <label>End Date</label>
+                        <input type="date" name="end_date" class="form-control" id="editEndDate">
                     </div>
                 </div>
-            </form>
-        </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Update</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </form>
     </div>
+</div>
+
     
-    <script>
-        function openEditModal(itemId, qty, startDate, endDate) {
-            document.getElementById('editItemId').value = itemId;
-            document.getElementById('editQuantity').value = qty;
-            document.getElementById('editStartDate').value = startDate;
-            document.getElementById('editEndDate').value = endDate;
-            document.getElementById('editModal').classList.remove('hidden');
-        }
+<script>
+    document.getElementById('editModal').addEventListener('show.bs.modal', function (event) {
+        const button = event.relatedTarget;
+        const id = button.getAttribute('data-id');
+        const qty = button.getAttribute('data-qty');
+        const start = button.getAttribute('data-start');
+        const end = button.getAttribute('data-end');
     
-        function closeEditModal() {
-            document.getElementById('editModal').classList.add('hidden');
-        }
+        // Fill input fields
+        // document.getElementById('editForm').action = `/keranjang/${id}/update`; // Set the form action dynamically
+        document.getElementById('idItem').value = id;
+        document.getElementById('editQty').value = qty;
+        document.getElementById('editStartDate').value = start;
+        document.getElementById('editEndDate').value = end;
     
-        document.getElementById('editItemForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            // Handle form submission with AJAX or form submit
-            // You can add your logic here to update the cart item
-            closeEditModal();
-        });
-    
-        function updateQuantity(itemId, newQty) {
-            if (newQty > 0) {
-                // AJAX call to update quantity
-                console.log(`Update item ${itemId} to quantity ${newQty}`);
-            }
-        }
+        // Set the form action dynamically
+        const form = document.getElementById('editForm');
+
+    });
     </script>
     
 </body>

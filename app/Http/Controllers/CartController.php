@@ -63,7 +63,7 @@ class CartController extends Controller
         return back()->with('success', 'Barang berhasil ditambahkan ke keranjang');
     }
 
-    public function remove($id)
+    public function delete($id)
     {
         // Hapus item dari keranjang berdasarkan ID
         $item = CartItem::findOrFail($id);
@@ -71,18 +71,18 @@ class CartController extends Controller
 
         return back()->with('success', 'Item berhasil dihapus dari keranjang');
     }
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         // Validasi input
         $validated = $request->validate([
+            'id' => 'required|exists:cart_items,id',
             'qty' => 'required|integer|min:1',
-            // Tambahkan validasi lain jika diperlukan
             'start_date' => 'required|date',
             'end_date' => 'required|date|after_or_equal:start_date',
         ]);
 
         // Update item keranjang
-        $item = CartItem::findOrFail($id);
+        $item = CartItem::findOrFail($validated['id']);
 
         $item->qty = $validated['qty'];
         $item->start_date = $validated['start_date'];
@@ -91,5 +91,6 @@ class CartController extends Controller
 
         return back()->with('success', 'Item berhasil diperbarui');
     }
+    
     
 }
