@@ -9,6 +9,7 @@
 </head>
 <body class="bg-gray-100 font-poppins">
     <!-- Navbar -->
+    {{-- safdf --}}
     <nav class="bg-white shadow-md p-4 fixed w-full z-10">
         <div class="container mx-auto flex justify-between items-center">
             <div class="flex items-center space-x-4">
