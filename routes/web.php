@@ -35,8 +35,9 @@ Route::post('/cart/add', [CartController::class, 'add'])->name('user.cart');;
 //     return view('user.keranjang');
 // });
 
-Route::get('/user.cart', [CartController::class, 'index'])->name('cart');
-Route::get('/cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
+Route::get('/cart', [CartController::class, 'index'])->name('cart');
+Route::post('/cart/update', [CartController::class, 'update'])->name('cart.update');
+Route::delete('/cart/delete/{id}', [CartController::class, 'delete'])->name('cart.delete');
 
 Route::get('/profile', function () {
     return view('profile');
