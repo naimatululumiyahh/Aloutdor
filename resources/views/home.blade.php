@@ -22,9 +22,8 @@
             </div>
             <div class="flex items-center space-x-4">
                 <a href="index.html" class="text-gray-700 hover:text-red-400 font-semibold">Beranda</a>
-                <a href="{{route('konten')}}" class="text-gray-700 hover:text-red-400 font-semibold">Produk</a>
-                <a href="sewaku.html" class="text-gray-700 hover:text-red-400 font-semibold">Sewaku</a>
-                <a href="profil.html" class="bg-red-400 text-white px-4 py-2 rounded-full hover:bg-red-500">Masuk</a>
+                <a href="#produk" class="text-gray-700 hover:text-red-400 font-semibold">Produk</a>
+                <a href="{{route('login')}}" class="bg-red-400 text-white px-4 py-2 rounded-full hover:bg-red-500">Masuk</a>
             </div>
         </div>
     </nav>
@@ -45,7 +44,7 @@
     </section>
 
     <!-- Kategori Produk -->
-    <section class="py-16 bg-gray-100">
+    <section id="produk" class="produk py-16 bg-gray-100">
         <div class="container mx-auto px-4">
             <h2 class="text-4xl font-bold text-center text-neutral-600 font-volkhov mb-4">Ada apa aja sih di <span class="text-red-400">AL</span><span class="text-blue-900">outdor</span>?</h2>
             <p class="text-lg text-center text-neutral-600 font-lato mb-12">Yuk lihat alat apa saja yang kita siapkan untuk mewujudkan experience kalian</p>

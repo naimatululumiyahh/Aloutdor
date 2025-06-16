@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SewaAja - Keranjang</title>
+    <title>SewaAja - cart</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body class="bg-gray-100 font-poppins">
@@ -34,7 +34,7 @@
         <div class="flex flex-col lg:flex-row gap-8">
             <!-- Kiri: Tabel Keranjang -->
             <div class="w-full lg:w-2/3 bg-white p-6 rounded-lg shadow-md">
-                <h2 class="text-2xl font-bold text-gray-900 mb-6">Keranjang</h2>
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">Cart</h2>
                 <div class="overflow-x-auto">
                     <table class="w-full text-left">
                         <thead>
@@ -122,9 +122,9 @@
                             </td>
                             <td class="p-2">
                                 <div class="flex items-center space-x-2">
-                                    <button class="w-6 h-6 bg-gray-200 rounded-full flex items-center justify-center" onclick="updateQuantity({{ $item->id }}, {{ $item->qty - 1 }})">-</button>
+                                    <button class="w-6 h-6 bg-gray-200 rounded-full flex items-center justify-center" type="button" onclick="updateQuantity({{ $item->id }}, {{ $item -> qty - 1 }})">-</button>
                                     <span class="text-sm">{{ $item->qty }}</span>
-                                    <button class="w-6 h-6 bg-gray-200 rounded-full flex items-center justify-center" onclick="updateQuantity({{ $item->id }}, {{ $item->qty + 1 }})">+</button>
+                                    <button class="w-6 h-6 bg-gray-200 rounded-full flex items-center justify-center" type="button" onclick="updateQuantity({{ $item->id }}, {{ $item->qty + 1 }})">+</button>
                                 </div>
                             </td>
                             <td class="p-2 text-sm font-semibold">Rp {{ number_format($item->barang->harga_per_hari * $days * $item->qty, 0, ',', '.') }}</td>
