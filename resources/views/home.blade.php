@@ -218,50 +218,7 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-red-400 text-white py-16">
-        <div class="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 px-4">
-            <div>
-                <h3 class="text-xl font-semibold mb-4 font-montserrat">ALoutdor</h3>
-                <ul class="space-y-2">
-                    <li><a href="produk.html" class="hover:underline">Sewa</a></li>
-                    <li><a href="tentang.html" class="hover:underline">Tentang Kami</a></li>
-                    <li><a href="kontak.html" class="hover:underline">Kontak Media</a></li>
-                </ul>
-            </div>
-            <div>
-                <h3 class="text-xl font-semibold mb-4 font-lato">Ikuti Kami</h3>
-                <ul class="space-y-2">
-                    <li class="flex items-center space-x-2">
-                        <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center">
-                            <span class="text-black">IG</span>
-                        </div>
-                        <a href="#" class="hover:underline">Instagram</a>
-                    </li>
-                    <li class="flex items-center space-x-2">
-                        <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center">
-                            <span class="text-black">WA</span>
-                        </div>
-                        <a href="#" class="hover:underline">Whatsapp</a>
-                    </li>
-                    <li class="flex items-center space-x-2">
-                        <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center">
-                            <span class="text-black">FB</span>
-                        </div>
-                        <a href="#" class="hover:underline">Facebook</a>
-                    </li>
-                </ul>
-            </div>
-            <div>
-                <h3 class="text-xl font-semibold mb-4 font-lato">Metode Pembayaran</h3>
-                <div class="flex space-x-2">
-                    <div class="w-14 h-10 bg-violet-900 rounded shadow"></div>
-                    <div class="w-14 h-10 bg-sky-700 rounded shadow"></div>
-                    <div class="w-14 h-10 bg-sky-500 rounded shadow"></div>
-                    <div class="w-14 h-10 bg-white rounded shadow"></div>
-                </div>
-            </div>
-        </div>
-    </footer>
+    @include('footer')
+
 </body>
 </html>

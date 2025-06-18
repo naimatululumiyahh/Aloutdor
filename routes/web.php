@@ -54,7 +54,7 @@ Route::get('/daftarbarang', function () {
 
 Route::get('/home', function () {
     return view('home');
-});
+}) -> name('home');
 
 Route::get('/logout', function () {
     session()->flush(); // hapus semua session
