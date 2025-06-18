@@ -88,7 +88,10 @@
                                     {{-- <button class="w-6 h-6 bg-gray-200 rounded-full flex items-center justify-center" onclick="updateQuantity({{ $item->id }}, {{ $item->qty + 1 }})">+</button> --}}
                                 </div>
                             </td>
-                            <td class="p-2 text-sm font-semibold">Rp {{ number_format($item->barang->harga_per_hari * $days * $item->qty, 0, ',', '.') }}</td>
+                            <?php
+                                $subtotal = $item->barang->harga_per_hari * $days * $item->qty;
+                            ?>
+                            <td class="p-2 text-sm font-semibold">Rp {{ number_format($subtotal, 0, ',', '.') }}</td>
                             <td class="p-2">
                                     <div class="flex space-x-2">
                                         <button class="text-blue-600 hover:text-blue-800"  data-bs-toggle="modal" 
@@ -130,41 +133,41 @@
                     </table>
                 </div>
                 <div class="flex justify-end mt-6 space-x-4">
-                    <p class="text-sm text-gray-500">Subtotal: <span class="text-base font-semibold text-black">Rp 540.000</span></p>
-                    <p class="text-sm text-gray-500">Total: <span class="text-xl font-bold text-black">Rp 540.000</span></p>
+                    <p class="text-sm text-gray-500">Total: <span class="text-xl font-bold text-black">
+                        @php
+                            $total = 0;
+                            foreach($items as $item) {
+                                if(isset($item->start_date) && isset($item->end_date)) {
+                                    $days = \Carbon\Carbon::parse($item->start_date)->diffInDays(\Carbon\Carbon::parse($item->end_date));
+                                    $subtotal = $item->barang->harga_per_hari * $days * $item->qty;
+                                    $total += $subtotal;
+                                }
+                            }
+                        @endphp
+                        Rp {{ number_format($total, 0, ',', '.') }}
+                    </span></p>
                 </div>
-            </div>
-
-            <!-- Kanan: Pembayaran -->
-            <div class="w-full lg:w-1/3 bg-white p-6 rounded-lg shadow-md">
-                <h2 class="text-2xl font-bold text-gray-900 mb-6">Pembayaran</h2>
-                <form class="space-y-4">
+                <form class="space-y-4 lg:w-1/3" action="{{ route('cart.checkout') }}" method="POST" >
+                    @csrf
                     <div>
                         <label class="text-sm font-semibold text-gray-800">Jaminan</label>
-                        <select class="w-full mt-2 p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-400">
-                            <option>KTP (Kartu Tanda Penduduk)</option>
-                            <option>SIM (Surat Izin Mengemudi)</option>
-                            <option>Kartu Pelajar</option>
+                        <select name="tipe_jaminan" class="w-full mt-2 p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-400">
+                            <option value="1">KTP (Kartu Tanda Penduduk)</option>
+                            <option value="2">SIM (Surat Izin Mengemudi)</option>
+                            <option value="3">Kartu Pelajar</option>
                         </select>
                     </div>
                     <div>
-                        <label class="text-sm font-semibold text-gray-800">Tanggal Pengambilan</label>
-                        <div class="relative mt-2">
-                            <input type="date" class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-400">
-                            <svg class="w-4 h-4 absolute right-3 top-3 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                            </svg>
-                        </div>
+                        <input type="hidden" name="user_id" value="1">
+                        <input type="hidden" name="total_price" value="{{ $total }}">
                     </div>
-                    <button type="submit" class="w-full bg-green-600 text-white py-3 rounded-lg hover:bg-green-700">Proses Pembayaran</button>
+                    
+                    <button type="submit" class="w-full bg-green-600 text-white py-3 rounded-lg hover:bg-green-700" onclick="alert('Pastikan semua data sudah benar sebelum checkout!')"><b>Checkout</b></button>
+                    <label class="text-sm font-semibold text-gray-800">Ketika checkout, otomatis seluruh item di cart hilang.</label>
                 </form>
-                <div class="mt-6 text-center">
-                    <p class="text-xs text-gray-600">ALoutdor</p>
-                    <p class="text-xs text-gray-600">NMID: 123412341234</p>
-                    <img src="https://placehold.co/200x200" alt="QRIS" class="w-40 h-40 mx-auto mt-4">
-                    <p class="text-xs text-gray-600 mt-2">Scan QRIS untuk melakukan pembayaran</p>
-                </div>
             </div>
+
+            
         </div>
     </div>
 
