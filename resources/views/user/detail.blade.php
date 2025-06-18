@@ -211,7 +211,7 @@
                 </p>
                 <div class="mt-4 space-y-4">
 
-                    <form class="mt-6 space-y-6" id="rentalForm" method="POST" action="{{ route('user.keranjang', ['cart_id' => 1, 'id_barang' => $barang->id]) }}">
+                    <form class="mt-6 space-y-6" id="rentalForm" method="POST" action="{{ route('user.cart', ['cart_id' => 1, 'id_barang' => $barang->id]) }}">
                         @csrf
                         <div>
                             <label class="text-gray-700 text-sm font-medium">Pilih Tanggal Sewa</label>
@@ -262,10 +262,10 @@
                             <input type="number" name="qty" min="1" max="{{ $barang->stok }}" value="1" class="w-16 p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-400">
                         </div>
                         
-                        <button type="submit" class="bg-red-400 text-white px-8 py-3 rounded-lg hover:bg-red-500 w-full">Tambahkan ke Keranjang</button>
+                        <button type="submit" class="bg-red-400 text-white px-8 py-3 rounded-lg hover:bg-red-500 w-full">Tambahkan ke cart</button>
                     </form>
 
-                    {{-- <form action="{{ route('user.keranjang', ['cart_id' => 1, 'id_barang' => $barang->id]) }}" method="POST" class="w-full max-w-m rounded-xl space-y-6">
+                    {{-- <form action="{{ route('user.cart', ['cart_id' => 1, 'id_barang' => $barang->id]) }}" method="POST" class="w-full max-w-m rounded-xl space-y-6">
                         <!-- Start Date -->
                         @csrf
                         <div>
