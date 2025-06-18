@@ -51,7 +51,7 @@ class CartController extends Controller
         // Tambahkan item ke keranjang
         CartItem::create([
             'cart_id' => 1,
-            'id_barang' => 2,
+            'id_barang' => $validated['id_barang'],
             'start_date' => $validated['start_date'],
             'end_date' => $validated['end_date'],
             'qty' => $validated['qty'],

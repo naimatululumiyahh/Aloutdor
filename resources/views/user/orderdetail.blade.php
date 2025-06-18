@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SewaAja - Keranjang</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 font-poppins">
+    <!-- Navbar -->
+    <nav class="bg-white shadow-md p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-4">
+                <h1 class="text-3xl font-bold text-red-400">AL<span class="text-gray-700">outdor</span></h1>
+                <div class="relative">
+                    <input type="text" placeholder="Cari alat camping..." class="pl-10 pr-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-400">
+                    <svg class="w-5 h-5 absolute left-3 top-2.5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                </div>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="index.html" class="text-gray-700 hover:text-red-400 font-semibold">Beranda</a>
+                <a href="kelola-barang.html" class="text-gray-700 hover:text-red-400 font-semibold">Kelola Barang</a>
+                <a href="sewaku.html" class="text-gray-700 hover:text-red-400 font-semibold">Sewaku</a>
+                <a href="profil.html" class="bg-red-400 text-white px-4 py-2 rounded-full hover:bg-red-500">Profil</a>
+                <a href="logout.html" class="text-gray-700 hover:text-red-400 font-semibold">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content: Keranjang dan Pembayaran -->
+    <div class="container mt-8 px-56">
+        <div class="flex flex-col lg:flex-row gap-8">
+            <div class="w-full bg-white p-6 rounded-lg shadow-md">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">Pembayaran</h2>
+                <h3>Total:</h3>
+                <h2 class="text-xl font-bold">Rp {{ number_format($order->total_price, 0, ',', '.') }}</h2>     
+                        <div class="mt-6 border-t pt-6">
+                            <h3 class="text-xl font-semibold mb-4">Status Pesanan</h3>
+                            
+                            <div class="bg-gray-50 p-4 rounded-lg border border-gray-200 mb-6 flex items-start gap-24">
+                                
+                                <div class="">
+                                    <div class="flex items-center mb-4">
+                                        <span class="inline-block w-3 h-3 rounded-full mr-2 
+                                            @if($order->status == 'unpaid') bg-yellow-500
+                                            @elseif($order->status == 'waiting_pickup') bg-blue-500
+                                            @elseif($order->status == 'rented') bg-green-500
+                                            @elseif($order->status == 'returned') bg-red-500
+                                            @else bg-gray-500 @endif">
+                                        </span>
+                                        <span class="text-lg font-bold uppercase">
+                                            @if($order->status == 'unpaid') Menunggu Pembayaran
+                                            @elseif($order->status == 'waiting_pickup') Menunggu Penjemputan
+                                            @elseif($order->status == 'rented') Sedang Disewa
+                                            @elseif($order->status == 'returned') Sudah Dikembalikan
+                                            @else Pesanan Selesai
+                                            @endif
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <div>
+                                            <p class="text-gray-600 text-sm">Order ID</p>
+                                            <p class="font-semibold">#{{ $order->id }}</p>
+                                        </div>
+                                        <div>
+                                            <p class="text-gray-600 text-sm mt-5">Tanggal Order</p>
+                                            <p class="font-semibold">{{ date('d M Y', strtotime($order->created_at)) }}</p>
+                                        </div>
+                                    </div>
+                                    {{-- <div>
+                                        <p class="text-gray-600 text-sm">Status Pembayaran</p>
+                                        <p class="font-semibold 
+                                            @if($order->payment_status == 'paid') text-green-600 
+                                            @elseif($order->payment_status == 'pending') text-yellow-600
+                                            @else text-red-600 @endif">
+                                            {{ $order->payment_status ?? 'Belum dibayar' }}
+                                        </p>
+                                    </div> --}}
+                                    
+                                
+                                </div>
+                                <div class="">
+                                    <h4 class="font-semibold mb-3">Timeline Pesanan</h4>
+                                    <div class="flex">
+                                        <div class="flex flex-col items-center mr-4">
+                                            <div class="w-4 h-4 bg-green-500 rounded-full"></div>
+                                            <div class="h-full w-0.5 bg-gray-300"></div>
+                                        </div>
+                                        <div>
+                                            <p class="font-medium">Pesanan Dibuat</p>
+                                            <p class="text-sm text-gray-500">{{ date('d M Y H:i', strtotime($order->created_at)) }}</p>
+                                        </div>
+                                    </div>
+
+                                    
+                                    <div class="flex">
+                                        <div class="flex flex-col items-center mr-4">
+                                            <div class="w-4 h-4 {{$order->status == 'unpaid' ? 'bg-yellow-400' : 'bg-green-500' }} rounded-full"></div>
+                                            <div class="h-full w-0.5 bg-gray-300"></div>
+                                        </div>
+                                        <div>
+                                            <p class="font-medium">
+                                                {{ $order->status == 'unpaid' ? 'Menunggu Pembayaran' : 'Pembayaran Dikonfirmasi' }}
+                                            </p>
+                                                
+                                            <p class="text-sm text-gray-500">{{$order->status == 'unpaid' ? 'Menunggu' : date('d M Y H:i', strtotime($order->updated_at)) }}</p>
+                                        </div>
+                                    </div>
+                                        @if($order->status == 'waiting_pickup' )
+                                        <div class="flex">
+                                            <div class="flex flex-col items-center mr-4">
+                                                <div class="w-4 h-4 bg-yellow-400 rounded-full"></div>
+                                                <div class="h-full w-0.5 bg-gray-300"></div>
+                                            </div>
+                                            <div>
+                                                <p class="font-medium">Menunggu Pengambilan</p>
+                                                {{-- <p class="text-sm text-gray-500">{{ $order->payment_confirmed_at ? date('d M Y H:i', strtotime($order->payment_confirmed_at)) : 'Menunggu' }}</p> --}}
+                                            </div>
+                                        </div>
+                                        {{-- <div class="flex">
+                                            <div class="flex flex-col items-center mr-4">
+                                                <div class="w-4 h-4 {{ $order->status == 'processing' || $order->status == 'completed' ? 'bg-green-500' : 'bg-gray-300' }} rounded-full"></div>
+                                                <div class="h-full w-0.5 bg-gray-300"></div>
+                                            </div>
+                                            <div>
+                                                <p class="font-medium">Pembayaran Dikonfirmasi</p>
+                                                <p class="text-sm text-gray-500">{{ $order->payment_confirmed_at ? date('d M Y H:i', strtotime($order->payment_confirmed_at)) : 'Menunggu' }}</p>
+                                            </div>
+                                        </div> --}}
+                                        @endif
+                                        @if($order->status == 'rented' || $order->status == 'returned')
+                                        <div class="flex">
+                                            <div class="flex flex-col items-center mr-4">
+                                                <div class="w-4 h-4 bg-green-500 rounded-full"></div>
+                                                <div class="h-full w-0.5 bg-gray-300"></div>
+                                            </div>
+                                            <div>
+                                                <p class="font-medium">Pesanan Diambil</p>
+                                                {{-- <p class="text-sm text-gray-500">{{ date('d M Y H:i', strtotime($order->rented_at)) }}</p> --}}
+                                            </div>
+                                            
+                                        </div>
+                                            @if($order->status == 'returned')
+                                                <div class="flex">
+                                                    <div class="flex flex-col items-center mr-4">
+                                                        <div class="w-4 h-4 bg-green-500 rounded-full"></div>
+                                                    </div>
+                                                    <div>
+                                                        <p class="font-medium">Pesanan Selesai</p>
+                                                        {{-- <p class="text-sm text-gray-500">{{ date('d M Y H:i', strtotime($order->completed_at)) }}</p> --}}
+                                                    </div>
+                                                </div>
+                                            @endif
+                                        @endif
+                                        
+                                    </div>
+                                    
+                                    
+                                    
+                                   
+                                </div>
+                                @if ($order->status == 'unpaid')
+                                <div>
+                                    <div class="text-center">
+                                        <h4 class="font-semibold mb-3">QR Code Pesanan</h4>
+                                        <div class="p-2 bg-white inline-block rounded-lg shadow-sm mb-2">
+                                            <img src="https://api.qrserver.com/v1/create-qr-code/?data={{ route('simulate.qr.scan', $order->code) }}&size=200x200" alt="QR Code">
+                                            <form method="GET">
+                                                <button type="submit">Refresh</button>
+                                            </form>
+                                            <a href="{{ route('simulate.qr.scan', $order->code) }}" >Link</a>
+                                        </div>
+                                        <p class="text-sm text-gray-600">Scan untuk detail pesanan</p>
+                                        {{-- @if($order->status == 'unpaid')
+                                        <div class="mt-2">
+                                            <a href="{{ route('payment.show', $order->id) }}" class="bg-red-400 text-white px-4 py-2 rounded-md text-sm hover:bg-red-500">
+                                                Bayar Sekarang
+                                            </a>
+                                        </div>
+                                        @endif --}}
+                                    </div>
+                                </div>
+                                @endif
+                            </div>
+                            
+                           
+                        </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-red-400 text-white py-16 mt-12">
+        <div class="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+                <h3 class="text-xl font-semibold mb-4 font-montserrat">ALoutdor</h3>
+                <ul class="space-y-2">
+                    <li><a href="#" class="hover:underline">Sewa</a></li>
+                    <li><a href="#" class="hover:underline">Tentang Kami</a></li>
+                    <li><a href="#" class="hover:underline">Kontak Media</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-xl font-semibold mb-4 font-lato">Ikuti Kami</h3>
+                <ul class="space-y-2">
+                    <li class="flex items-center space-x-2">
+                        <div class="w-8 h-8 bg-white rounded-full flex items-center justify-center">
+                            <span class="text-black">IG</span>
+                        </div>
+                        <a href="#" class="hover:underline">Instagram</a>
+                    </li>
+                    <li class="flex items-center space-x-2">
+                        <div class="w-8 h-8 bg-white rounded-full flex items-center justify-center">
+                            <span class="text-black">WA</span>
+                        </div>
+                        <a href="#" class="hover:underline">Whatsapp</a>
+                    </li>
+                    <li class="flex items-center space-x-2">
+                        <div class="w-8 h-8 bg-white rounded-full flex items-center justify-center">
+                            <span class="text-black">FB</span>
+                        </div>
+                        <a href="#" class="hover:underline">Facebook</a>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-xl font-semibold mb-4 font-lato">Metode Pembayaran</h3>
+                <div class="flex space-x-2">
+                    <div class="w-12 h-8 bg-purple-900 rounded"></div>
+                    <div class="w-12 h-8 bg-sky-700 rounded"></div>
+                    <div class="w-12 h-8 bg-sky-500 rounded"></div>
+                    <div class="w-12 h-8 bg-white border border-gray-300 rounded"></div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Edit Modal -->
+
+    
+<script>
+    document.getElementById('editModal').addEventListener('show.bs.modal', function (event) {
+        const button = event.relatedTarget;
+        const id = button.getAttribute('data-id');
+        const qty = button.getAttribute('data-qty');
+        const start = button.getAttribute('data-start');
+        const end = button.getAttribute('data-end');
+    
+        // Fill input fields
+        // document.getElementById('editForm').action = `/keranjang/${id}/update`; // Set the form action dynamically
+        document.getElementById('idItem').value = id;
+        document.getElementById('editQty').value = qty;
+        document.getElementById('editStartDate').value = start;
+        document.getElementById('editEndDate').value = end;
+    
+        // Set the form action dynamically
+        const form = document.getElementById('editForm');
+
+    });
+    </script>
+    
+</body>
+</html>

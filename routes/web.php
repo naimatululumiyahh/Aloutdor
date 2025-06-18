@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -37,12 +38,19 @@ Route::get('/cart', [CartController::class, 'index'])->name('cart');
 Route::post('/cart/update', [CartController::class, 'update'])->name('cart.update');
 Route::delete('/cart/delete/{id}', [CartController::class, 'delete'])->name('cart.delete');
 
+Route::post('/cart/checkout', [OrderController::class, 'checkout'])->name('cart.checkout');;
+
+Route::get('/orders/{id}', [OrderController::class, 'show'])->name('order.show');
+
+Route::get('/simulate/{code}', [OrderController::class, 'simulateQrScan'])->name('simulate.qr.scan');
+Route::post('/simulate/{code}/pay', [OrderController::class, 'simulatePay'])->name('simulate.qr.pay');
+
 Route::get('/profile', function () {
     return view('profile');
 });
 
 Route::get('/pesanan', function () {
-    return view('pesanan');
+    return view('user/pesanan');
 });
 
 
