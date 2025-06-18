@@ -7,11 +7,27 @@ use Illuminate\Http\Request;
 
 class BarangController extends Controller
 {
+    // Tampilkan daftar semua barang di halaman 'konten'
     public function index()
     {
         $data = Barang::all(); // ambil semua data dari tabel barang
         return view('konten', compact('data')); // kirim data ke view
     }
+
+    // Tampilkan daftar barang di halaman 'daftar_barang'
+    public function daftarbarang()
+    {
+        $data = Barang::all();
+        return view('daftarbarang', compact('data'));
+    }
+
+    // Tampilkan daftar barang untuk penyewaan di halaman 'penyewaan'
+    public function penyewaan()
+    {
+        $data = Barang::all();
+        return view('penyewaan', compact('data'));
+    }
+   
     public function create()
     {
         return view('barang.create'); // tampilkan form untuk menambah barang

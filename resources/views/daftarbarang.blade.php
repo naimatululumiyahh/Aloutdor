@@ -19,7 +19,7 @@
                 <h2 class="text-3xl font-bold text-gray-900 mb-6">Dashboard Pemilik</h2>
                 <ul class="space-y-4">
                     <li>
-                        <a href="profil.html" class="flex items-center space-x-2 text-lg font-bold text-black hover:bg-gray-100 p-2 rounded">
+                        <a href="{{route('profile')}}" class="flex items-center space-x-2 text-lg font-bold text-black hover:bg-gray-100 p-2 rounded">
                             <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                             </svg>
@@ -27,7 +27,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="kelola-barang.html" class="flex items-center space-x-2 text-lg font-bold text-black bg-red-400/10 p-2 rounded">
+                        <a href="{{ route('daftarbarang') }}" class="flex items-center space-x-2 text-lg font-bold text-black bg-red-400/10 p-2 rounded">
                             <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
                             </svg>
@@ -35,7 +35,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="peminjaman.html" class="flex items-center space-x-2 text-lg font-bold text-black hover:bg-gray-100 p-2 rounded">
+                        <a href="{{Route('peminjaman') }}" class="flex items-center space-x-2 text-lg font-bold text-black hover:bg-gray-100 p-2 rounded">
                             <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
                             </svg>
@@ -87,30 +87,30 @@
                                 <th class="py-4 px-2 text-xl font-bold text-gray-700">Harga Per Hari</th>
                                 <th class="py-4 px-2 text-xl font-bold text-gray-700">Kategori</th>
                                 <th class="py-4 px-2 text-xl font-bold text-gray-700">Deskripsi</th>
-                                <th class="py-4 px-2 text-xl font-bold text-gray-700">Halaman Produk</th>
                                 <th class="py-4 px-2 text-xl font-bold text-gray-700">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="border-b border-gray-200">
-                                <td class="py-4 px-2 text-base text-gray-600">1</td>
-                                <td class="py-4 px-2 text-base text-gray-600">Tenda 7P</td>
-                                <td class="py-4 px-2 text-base text-gray-600">Rp100.000</td>
-                                <td class="py-4 px-2 text-base text-gray-600"><span class="bg-lime-200 text-lime-600 text-sm font-bold px-4 py-1 rounded-2xl">Berteduh</span></td>
-                                <td class="py-4 px-2 text-base text-gray-600">Lorem Ipsu...</td>
-                                <td class="py-4 px-2 text-base text-gray-600"><a href="#" class="text-blue-600 hover:underline">Lihat</a></td>
-                                <td class="py-4 px-2"><button class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Detail</button></td>
-                            </tr>
-                            <tr class="border-b border-gray-200">
-                                <td class="py-4 px-2 text-base text-gray-600">2</td>
-                                <td class="py-4 px-2 text-base text-gray-600">Tenda 7P</td>
-                                <td class="py-4 px-2 text-base text-gray-600">Rp100.000</td>
-                                <td class="py-4 px-2 text-base text-gray-600"><span class="bg-lime-200 text-lime-600 text-sm font-bold px-4 py-1 rounded-2xl">Berteduh</span></td>
-                                <td class="py-4 px-2 text-base text-gray-600">Lorem Ipsu...</td>
-                                <td class="py-4 px-2 text-base text-gray-600"><a href="#" class="text-blue-600 hover:underline">Lihat</a></td>
-                                <td class="py-4 px-2"><button class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Detail</button></td>
-                            </tr>
-                            <!-- Repeat for other rows, limited to 2 for brevity -->
+                        @foreach($data as $index => $barang)
+                        <tr class="border-b border-gray-200"></tr>
+                            <td class="py-4 px-2 text-base text-gray-600">{{ $index + 1 }}</td>
+                            <td class="py-4 px-2 text-base text-gray-600">{{ $barang->nama_barang }}</td>
+                            <td class="py-4 px-2 text-base text-gray-600">Rp{{ number_format($barang->harga_per_hari, 0, ',', '.') }}</td>
+                            <td class="py-4 px-2 text-base text-gray-600">
+                                <span class="bg-lime-200 text-lime-600 text-sm font-bold px-4 py-1 rounded-2xl">
+                                    {{ $barang->kategori ?? '-' }}
+                                </span>
+                            </td>
+                            <td class="py-4 px-2 text-base text-gray-600">
+                                {{ \Illuminate\Support\Str::limit($barang->description, 12, '...') }}
+                            </td>
+                            
+                            <td class="py-4 px-2">
+                                <button class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Detail</button>
+                            </td>
+                        </tr>
+                        @endforeach
+
                         </tbody>
                     </table>
                 </div>

@@ -50,7 +50,10 @@ Route::get('/pesanan', function () {
 
 Route::get('/daftarbarang', function () {
     return view('daftarbarang');
-});
+}) -> name('daftarbarang');
+
+Route::get('/daftarbarang', [BarangController::class, 'daftarbarang'])->name('daftarbarang');
+
 
 Route::get('/home', function () {
     return view('home');
@@ -60,3 +63,8 @@ Route::get('/logout', function () {
     session()->flush(); // hapus semua session
     return redirect('/login');
 })->name('logout');
+
+
+ROute::get('/peminjaman', function () {
+    return view('peminjaman');
+})->name('peminjaman');
