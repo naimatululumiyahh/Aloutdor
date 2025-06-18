@@ -12,11 +12,11 @@ class CartController extends Controller
     
     public function index()
     {
-        // Ambil keranjang aktif user
+        // Ambil cart aktif user
         $cart = Cart::where('user_id', 1)->first(); // Ganti 1 dengan ID user yang sesuai
         
         if (!$cart) {
-            return view('user.keranjang', ['items' => []]);
+            return view('user.cart', ['items' => []]);
         }   
         
         // Get cart items with their related barang models
@@ -24,7 +24,7 @@ class CartController extends Controller
 
         // dd($items);
         
-        return view('user.keranjang', ['items' => $items]);
+        return view('user.cart', ['items' => $items]);
     }
 
     public function add(Request $request) {
@@ -40,7 +40,7 @@ class CartController extends Controller
         // $user = auth()->user();
         //   Ganti dengan ID user yang sesuai, misalnya dari session atau auth
     
-        // Ambil atau buat keranjang aktif user
+        // Ambil atau buat cart aktif user
         // $cart = Cart::firstOrCreate(
         //     ['user_id' => $user->id],
         //     ['created_at' => now()]
@@ -48,7 +48,7 @@ class CartController extends Controller
 
         // dd($validated);
 
-        // Tambahkan item ke keranjang
+        // Tambahkan item ke cart
         CartItem::create([
             'cart_id' => 1,
             'id_barang' => 2,
@@ -60,16 +60,16 @@ class CartController extends Controller
 
     
 
-        return back()->with('success', 'Barang berhasil ditambahkan ke keranjang');
+        return back()->with('success', 'Barang berhasil ditambahkan ke cart');
     }
 
     public function delete($id)
     {
-        // Hapus item dari keranjang berdasarkan ID
+        // Hapus item dari cart berdasarkan ID
         $item = CartItem::findOrFail($id);
         $item->delete();
 
-        return back()->with('success', 'Item berhasil dihapus dari keranjang');
+        return back()->with('success', 'Item berhasil dihapus dari cart');
     }
     public function update(Request $request)
     {
@@ -81,7 +81,7 @@ class CartController extends Controller
             'end_date' => 'required|date|after_or_equal:start_date',
         ]);
 
-        // Update item keranjang
+        // Update item cart
         $item = CartItem::findOrFail($validated['id']);
 
         $item->qty = $validated['qty'];

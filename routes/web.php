@@ -32,7 +32,7 @@ Route::post('/cart/add', [CartController::class, 'add'])->name('user.cart');;
 
 
 // Route::get('/cart', function () {
-//     return view('user.keranjang');
+//     return view('user.cart');
 // });
 
 Route::get('/cart', [CartController::class, 'index'])->name('cart');

@@ -23,7 +23,7 @@
         <!-- Nav Links & Profile Dropdown -->
         <div class="flex items-center space-x-4 relative">
             <a href="{{ route('konten') }}" class="text-gray-700 hover:text-red-400 font-semibold">Beranda</a>
-            <a href="{{ route('cart') }}" class="text-gray-700 hover:text-red-400 font-semibold">Keranjang</a>
+            <a href="{{ route('cart') }}" class="text-gray-700 hover:text-red-400 font-semibold">cart</a>
 
             <!-- Profile Dropdown -->
             <div class="relative">
