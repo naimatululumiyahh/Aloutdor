@@ -5,66 +5,60 @@ use App\Http\Controllers\BarangController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProfileController;
+
 Route::get('/', function () {
     return view('welcome');
 });
 
-// Tambahkan ->name('login'); di bagian akhir
-Route::get('/login', function () {
-    return view('login');
-})->name('login');
+Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+Route::post('/login', [AuthController::class, 'login']);
 
+Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
+Route::post('/register', [AuthController::class, 'register'])->name('register.post');
 
-Route::get('/signup', function () {
-    return view('signup');
-}) ->name('signup');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-// Route::get('/konten', function () {
-//     return view('konten');
-// });
+Route::middleware('auth')->group(function () {
 
-Route::get('/konten', [BarangController::class, 'index'])->name('konten');
-Route::resource('barang', BarangController::class);
+    // HOME
+    Route::get('/home', function () {
+        return view('home');
+    })->name('home');
 
-Route::get('/detail/{id}', [BarangController::class, 'show']
-)->name('user.detail');
+    // KONTEN
+    Route::get('/konten', [BarangController::class, 'index'])->name('konten');
+    Route::get('/detail/{id}', [BarangController::class, 'show']
+    )->name('user.detail');
 
-Route::post('/cart/add', [CartController::class, 'add'])->name('user.cart');;
+    // KERANJANG DAN CHECKOUT
+    Route::post('/cart/add', [CartController::class, 'add'])->name('user.cart');;
+    Route::get('/cart', [CartController::class, 'index'])->name('cart');
+    Route::post('/cart/update', [CartController::class, 'update'])->name('cart.update');
+    Route::delete('/cart/delete/{id}', [CartController::class, 'delete'])->name('cart.delete');
+    Route::post('/cart/checkout', [OrderController::class, 'checkout'])->name('cart.checkout');
+    Route::get('/simulate/{code}', [OrderController::class, 'simulateQrScan'])->name('simulate.qr.scan');
+    Route::post('/simulate/{code}/pay', [OrderController::class, 'simulatePay'])->name('simulate.qr.pay');
+    // Route::post('/cart/checkout/{item_id}', [OrderController::class, 'checkoutItem'])->name('cart.checkout.item');
 
+    // PROFIL DAN PESANAN SAYA
+    Route::get('/orders/{id}', [OrderController::class, 'show'])->name('order.show');
+    Route::get('/profile/account', [ProfileController::class, 'showProfileAccount'])->name('profile.account');
+    Route::get('/profile/orders', [ProfileController::class, 'showOrders'])->name('profile.orders');
 
-// Route::get('/cart', function () {
-//     return view('user.cart');
-// });
+    // ADMIN
+    Route::get('/daftarbarang', function () {
+        return view('daftarbarang');
+    });
 
-Route::get('/cart', [CartController::class, 'index'])->name('cart');
-Route::post('/cart/update', [CartController::class, 'update'])->name('cart.update');
-Route::delete('/cart/delete/{id}', [CartController::class, 'delete'])->name('cart.delete');
-
-Route::post('/cart/checkout', [OrderController::class, 'checkout'])->name('cart.checkout');;
-
-Route::get('/orders/{id}', [OrderController::class, 'show'])->name('order.show');
-
-Route::get('/simulate/{code}', [OrderController::class, 'simulateQrScan'])->name('simulate.qr.scan');
-Route::post('/simulate/{code}/pay', [OrderController::class, 'simulatePay'])->name('simulate.qr.pay');
-
-Route::get('/profile', function () {
-    return view('profile');
-}) ->name('profile');
-
-Route::get('/pesanan', function () {
-    return view('user/pesanan');
+    // Route::get('/pesanan', function () {
+    //     return view('user.pesanan');
+    // });
+    
+    // LOGOUT
+    Route::get('/logout', function () {
+        session()->flush(); // hapus semua session
+        return redirect('/login');
+    })->name('logout');
 });
-
-
-Route::get('/daftarbarang', function () {
-    return view('daftarbarang');
-});
-
-Route::get('/home', function () {
-    return view('home');
-});
-
-Route::get('/logout', function () {
-    session()->flush(); // hapus semua session
-    return redirect('/login');
-})->name('logout');

@@ -45,8 +45,9 @@
       </h2>
       <p class="text-center text-zinc-800 text-lg mb-6 font-poppins">Enjoy your journey</p>
 
-      <form method="POST" action="/login" class="flex flex-col gap-6">
+      <form method="POST" action="{{ route('login') }}" class="flex flex-col gap-6">
         <!-- Email -->
+        @csrf
         <div>
           <label
             for="email"
