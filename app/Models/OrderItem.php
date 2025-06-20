@@ -27,6 +27,6 @@ class OrderItem extends Model
 
     public function barang()
     {
-        return $this->belongsTo(Barang::class, 'barang_id', 'id');
+        return $this->belongsTo(Barang::class, 'id_barang', 'id');
     }
 }

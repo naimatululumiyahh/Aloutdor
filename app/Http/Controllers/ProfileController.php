@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Order;
+use App\Models\OrderItem;
 use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller{
@@ -18,8 +20,27 @@ class ProfileController extends Controller{
 
     public function showOrders()
     {   
-            
+           
+
+            // Ambil data user yang sedang login
+            $user = Auth::user();
+
+            // Get all orders for the current user
+            $orders = Order::where('user_id', $user->id)->pluck('id');
+
+            // If no orders, return empty array
+            if ($orders->isEmpty()) {
+                return view('user.profile-orders', ['rents' => []]);
+            }
+
+            // Get all order items for the user's orders
+            $rents = OrderItem::with(['barang', 'order'])
+                ->whereIn('order_id', $orders)
+                ->get();
+
+            return view('user.profile-orders', ['rents' => $rents]);
     }
+    
     
 
     // public function updateProfile(Request $request)

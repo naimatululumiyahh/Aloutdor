@@ -46,15 +46,16 @@ Route::middleware('auth')->group(function () {
     Route::get('/orders/{id}', [OrderController::class, 'show'])->name('order.show');
     Route::get('/profile/account', [ProfileController::class, 'showProfileAccount'])->name('profile.account');
     Route::get('/profile/orders', [ProfileController::class, 'showOrders'])->name('profile.orders');
+    Route::get('/orders/{order_id}/invoice/{id}', [OrderController::class, 'showInvoice'])->name('order.invoice');
 
     // ADMIN
     Route::get('/daftarbarang', function () {
         return view('daftarbarang');
     });
 
-    // Route::get('/pesanan', function () {
-    //     return view('user.pesanan');
-    // });
+    Route::get('/pesanan', function () {
+        return view('user.pesanan');
+    });
     
     // LOGOUT
     Route::get('/logout', function () {

@@ -13,30 +13,6 @@ use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
-    // public function checkout(Request $request)
-    // {
-        
-    //     $validated = $request->validate([
-    //         'user_id' => 'required',
-    //         'tipe_jaminan' => 'required',
-    //         'total_price' => 'required|numeric',
-    //     ]);
-
-   
-    //     $code = Str::uuid();
-
-    //     $order = Order::create([
-    //         'user_id' => $validated['user_id'],
-    //         'code' => $code, // Generate unique order code here
-    //         'tipe_jaminan' => $validated['tipe_jaminan'],
-    //         'total_price' => $validated['total_price'],
-    //         'status' => 'unpaid',
-    //         'qr_code_url' => 'https://api.qrserver.com/v1/create-qr-code/?data=' . $code . '&size=150x150',
-    //     ]);
-
-        
-    //     return redirect()->route('order.show', ['id' => $order->id]);
-    // }
     
     public function checkout(Request $request)
     {   
@@ -60,7 +36,6 @@ class OrderController extends Controller
 
         // dd($order);
 
-        // Create order items from cart items
         foreach ($cartItems as $item) {
             OrderItem::create([
                 'order_id' => $order->id,
@@ -99,7 +74,24 @@ class OrderController extends Controller
     $payment = Order::where('code', $code)->firstOrFail();
     $payment->status = 'waiting_pickup';
     $payment->save();
+
+    $orderItems = OrderItem::where('order_id', $payment->id)->get();
+
+    foreach ($orderItems as $index => $item) {
+        $invoiceCode = 'INV-' . now()->format('Ymd') . '-' . $payment->id . '-' . str_pad($index + 1, 2, '0', STR_PAD_LEFT);
+        
+        $item->invoice = $invoiceCode;
+        $item->save();
+    }
     // dd($payment);
     return redirect()->route('simulate.qr.scan', ['code' => $code])->with('status', 'Payment simulated as success!');
 }
+
+    public function showInvoice($order_id, $id)
+    {
+        $order = Order::findOrFail($order_id);
+        $item = OrderItem::findOrFail($id);
+
+        return view('user.invoice', compact('order', 'item'));
+    }
 }
