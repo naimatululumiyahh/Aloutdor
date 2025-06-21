@@ -35,9 +35,11 @@
                             </tr>
                         </thead>
                         <tbody>
-                           
+                        <?php $total = 0; ?>
                         @forelse($items as $item)
+                        
                         <?php
+                        
                             if (!$item->barang) {
                                 dd("Barang tidak ditemukan untuk cart_item ID: " . $item->id);
                             }
@@ -73,7 +75,7 @@
                                 <span class="block text-xs text-gray-500 mt-1">
                                     @if(isset($item->start_date) && isset($item->end_date))
                                         @php
-                                            $days = \Carbon\Carbon::parse($item->start_date)->diffInDays(\Carbon\Carbon::parse($item->end_date));
+                                            $days = (\Carbon\Carbon::parse($item->start_date)->diffInDays(\Carbon\Carbon::parse($item->end_date))) + 1;
                                         @endphp
                                         {{ $days }} hari
                                     @else
@@ -87,9 +89,15 @@
                                 </div>
                             </td>
                             <?php
-                                $subtotal = $item->barang->harga_per_hari * $days * $item->qty;
+                                // if ($item->subtotal == $item->barang->harga_per_hari * $days * $item->qty){
+                                    // $subtotal = $item->subtotal;
+                                // }
+                                // else{
+                                    // $subtotal = 0;
+                                // }
+                                $total += $item->subtotal;
                             ?>
-                            <td class="p-2 text-sm font-semibold">Rp {{ number_format($subtotal, 0, ',', '.') }}</td>
+                            <td class="p-2 text-sm font-semibold">Rp {{ number_format($item->subtotal, 0, ',', '.') }}</td>
                             <td class="p-2">
                                     <div class="flex space-x-2">
                                         <button class="text-blue-600 hover:text-blue-800"  data-bs-toggle="modal" 
@@ -97,7 +105,9 @@
                                         data-id="{{ $item->id }}"
                                         data-qty="{{ $item->qty }}"
                                         data-start="{{ $item->start_date }}"
-                                        data-end="{{ $item->end_date }}">
+                                        data-end="{{ $item->end_date }}"
+                                        data-subtotal="{{ $item->subtotal }}"
+                                        >
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                                             </svg>
@@ -132,21 +142,12 @@
                 </div>
                 <div class="flex justify-end mt-6 space-x-4">
                     <p class="text-sm text-gray-500">Total: <span class="text-xl font-bold text-black">
-                        @php
-                            $total = 0;
-                            foreach($items as $item) {
-                                if(isset($item->start_date) && isset($item->end_date)) {
-                                    $days = \Carbon\Carbon::parse($item->start_date)->diffInDays(\Carbon\Carbon::parse($item->end_date));
-                                    $subtotal = $item->barang->harga_per_hari * $days * $item->qty;
-                                    $total += $subtotal;
-                                }
-                            }
-                        @endphp
                         Rp {{ number_format($total, 0, ',', '.') }}
                     </span></p>
                 </div>
                 <form class="space-y-4 lg:w-1/3" action="{{ route('cart.checkout') }}" method="POST" >
                     @csrf
+                    <div></div>
                     <div>
                         <label class="text-sm font-semibold text-gray-800">Jaminan</label>
                         <select name="tipe_jaminan" class="w-full mt-2 p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-400">
@@ -157,6 +158,7 @@
                     </div>
                     <div>
                         <input type="hidden" name="user_id" value="1">
+
                         <input type="hidden" name="total_price" value="{{ $total }}">
                     </div>
                     
@@ -202,6 +204,7 @@
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                 </div>
             </div>
+            <input type="number" name="subtotal" value=0 hidden>
         </form>
     </div>
 </div>
@@ -214,6 +217,7 @@
         const qty = button.getAttribute('data-qty');
         const start = button.getAttribute('data-start');
         const end = button.getAttribute('data-end');
+        // const subtotal = button.getAttribute('data-subtotal');
     
         // Fill input fields
         // document.getElementById('editForm').action = `/cart/${id}/update`; // Set the form action dynamically
@@ -221,6 +225,7 @@
         document.getElementById('editQty').value = qty;
         document.getElementById('editStartDate').value = start;
         document.getElementById('editEndDate').value = end;
+        // document.getElementById('editSubtotal').value = subtotal;
     
         // Set the form action dynamically
         const form = document.getElementById('editForm');

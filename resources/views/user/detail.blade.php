@@ -211,7 +211,13 @@
                 </p>
                 <div class="mt-4 space-y-4">
 
-                    <form class="mt-6 space-y-6" id="rentalForm" method="POST" action="{{ route('user.cart', ['cart_id' => 1, 'id_barang' => $barang->id]) }}">
+                    {{-- @php
+                        $user_id = auth()->id();
+                        $cart = DB::table('cart')->where('user_id', $user_id)->first();
+                        $cart_id = $cart ? $cart->id : 0;
+                    @endphp --}}
+                    
+                    <form class="mt-6 space-y-6" id="rentalForm" method="POST" action="{{ route('user.cart', ['id_barang' => $barang->id]) }}">
                         @csrf
                         <div>
                             <label class="text-gray-700 text-sm font-medium">Pilih Tanggal Sewa</label>
@@ -261,6 +267,43 @@
                             <label class="text-gray-700 text-sm font-medium">Jumlah</label>
                             <input type="number" name="qty" min="1" max="{{ $barang->stok }}" value="1" class="w-16 p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-400">
                         </div>
+
+                        <input type="number" name="subtotal" id="subtotal" value="{{ $barang->harga_per_hari }}" hidden>
+                        <script>
+                            document.addEventListener('DOMContentLoaded', function() {
+                                const pricePerDay = {{ $barang->harga_per_hari }};
+                                const subtotalInput = document.getElementById('subtotal');
+                                const qtyInput = document.querySelector('input[name="qty"]');
+                                const startDateInput = document.getElementById('startDate');
+                                const endDateInput = document.getElementById('endDate');
+                                
+                                function updateSubtotal() {
+                                    const qty = parseInt(qtyInput.value) || 1;
+                                    const days = calculateDays(startDateInput.value, endDateInput.value);
+                                    subtotalInput.value = pricePerDay * days * qty;
+                                }
+                                
+                                function calculateDays(start, end) {
+                                    if (!start || !end) return 1;
+                                    const startDate = new Date(start);
+                                    const endDate = new Date(end);
+                                    const diffTime = endDate - startDate;
+                                    return Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
+                                }
+                                
+                                // Initial calculation
+                                updateSubtotal();
+                                
+                                // Update when quantity changes
+                                qtyInput.addEventListener('input', updateSubtotal);
+                                
+                                // Check for date changes periodically
+                                setInterval(updateSubtotal, 500);
+                                
+                                // Update before form submission
+                                document.getElementById('rentalForm').addEventListener('submit', updateSubtotal);
+                            });
+                        </script>
                         
                         <button type="submit" class="bg-red-400 text-white px-8 py-3 rounded-lg hover:bg-red-500 w-full">Tambahkan ke cart</button>
                     </form>

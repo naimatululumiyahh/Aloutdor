@@ -16,7 +16,7 @@
                 <h2 class="text-3xl font-bold text-gray-900 mb-6">Profil</h2>
                 <ul class="space-y-4">
                     <li>
-                        <a href="{{ route('profile') }}" class="flex items-center space-x-2 text-lg font-bold text-black bg-red-400/10 p-2 rounded">
+                        <a href="{{ route('profile.account') }}" class="flex items-center space-x-2 text-lg font-bold text-black bg-red-400/10 p-2 rounded">
                             <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                             </svg>
@@ -28,7 +28,7 @@
                             <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
                             </svg>
-                            <span>Pesanan Saya</span>
+                            <span>Peminjaman Saya</span>
                         </a>
                     </li>
                 </ul>
@@ -41,11 +41,11 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
                             <label class="text-sm font-semibold text-gray-500">Nama Lengkap</label>
-                            <input type="text" value="" class="w-full mt-2 p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-400">
+                            <input type="text" value="{{$user->name}}" class="w-full mt-2 p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-400">
                         </div>
                         <div>
                             <label class="text-sm font-semibold text-gray-500">Alamat Email</label>
-                            <input type="email" value="" class="w-full mt-2 p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-400">
+                            <input type="email" value="{{$user->email}}" class="w-full mt-2 p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-400">
                         </div>
                     </div>
                     <div>
