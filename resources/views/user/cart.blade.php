@@ -83,9 +83,7 @@
                             </td>
                             <td class="p-2">
                                 <div class="flex items-center space-x-2">
-                                    {{-- <button class="w-6 h-6 bg-gray-200 rounded-full flex items-center justify-center" onclick="updateQuantity({{ $item->id }}, {{ $item->qty - 1 }})">-</button> --}}
                                     <span class="text-sm">{{ $item->qty }}</span>
-                                    {{-- <button class="w-6 h-6 bg-gray-200 rounded-full flex items-center justify-center" onclick="updateQuantity({{ $item->id }}, {{ $item->qty + 1 }})">+</button> --}}
                                 </div>
                             </td>
                             <?php
