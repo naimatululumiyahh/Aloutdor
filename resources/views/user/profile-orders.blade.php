@@ -86,11 +86,11 @@
                                 <p class="text-xs mb-2">Order ID: #{{$order->order_id}}</p>
                                 <h3 class="text-xl font-extrabold text-bold">{{ $order->barang->nama_barang }} <span class="text-base font-medium text-black">({{ $order->quantity }} x {{ $order->duration }} hari)</span></h3>
                                 <div class="mt-2 flex items-center">
-                                    @if ($order->order->status == 'returned')
+                                    @if ($order->order->status  == 'paid' && $order->status == 'returned')
                                         <span class="bg-blue-500 text-white text-sm font-semibold px-4 py-1 rounded-2xl">Dikembalikan</span>
-                                    @elseif ($order->order->status  == 'rented')
+                                    @elseif ($order->order->status  == 'paid' && $order->status  == 'rented')
                                         <span class="bg-green-700 text-white text-sm font-semibold px-4 py-1 rounded-2xl">Dipinjam</span>
-                                    @elseif ($order->order->status  == 'waiting_pickup')
+                                    @elseif ($order->order->status  == 'paid' && $order->status  == 'waiting_pickup')
                                         <span class="bg-yellow-500 text-white text-sm font-semibold px-4 py-1 rounded-2xl">Menunggu Pengambilan</span>
                                     @else
                                         <span class="bg-red-600 text-white text-sm font-semibold px-4 py-1 rounded-2xl">Belum Bayar</span>
@@ -123,9 +123,10 @@
                             <div class="mb-5">
                             @if ($order->order->status == 'unpaid')
                                 <a href="{{ route('order.show', $order->order_id) }}" class="mt-4 bg-gray-800 text-white px-6 py-2 rounded-xl hover:bg-gray-900 text-left inline-block">Bayar Sekarang <span class="text-xs block">Order ID: #{{$order->order_id}}</span></a>
-                            @elseif ($order->order->status == 'waiting_pickup')
-                                <a href="" class="mt-4 bg-gray-800 text-white px-6 py-2 rounded-xl hover:bg-gray-900 inline-block">Lihat Invoice <span class="text-xs block">OrderItem ID: #{{$order->id}}</span></a>
-                            @elseif ($order->order->status == 'returned')
+                            @elseif ($order->status == 'waiting_pickup')
+                                <a href="{{ route('order.show', $order->order_id) }}" class="mt-4 bg-gray-800 text-white px-6 py-2 rounded-xl hover:bg-gray-900 inline-block">Lihat Informasi Order <span class="text-xs block">Order ID: #{{$order->order_id}}</span></a>
+                                <a href="" class="mt-4 bg-gray-800 text-white px-6 py-2 rounded-xl hover:bg-gray-900 inline-block">Invoice <span class="text-xs block">OrderItem ID: #{{$order->id}}</span></a>
+                            @elseif ($order->status == 'returned')
                                 <a href="" class="mt-4 bg-gray-800 text-white px-6 py-2 rounded-xl hover:bg-gray-900 inline-block">Review <span class="text-xs block">OrderItem ID: #{{$order->id}}</span></a>
                             @endif
                             </div>

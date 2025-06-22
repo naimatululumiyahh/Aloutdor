@@ -45,6 +45,7 @@ class OrderController extends Controller
                 'quantity' => $item->qty,
                 'invoice' => '',
                 'subtotal' => $item->subtotal,
+                'status' => 'unpaid',
             ]);
         }
 
@@ -72,7 +73,7 @@ class OrderController extends Controller
     public function simulatePay(Request $request, $code)
 {
     $payment = Order::where('code', $code)->firstOrFail();
-    $payment->status = 'waiting_pickup';
+    $payment->status = 'paid';
     $payment->save();
 
     $orderItems = OrderItem::where('order_id', $payment->id)->get();

@@ -33,7 +33,7 @@
     <div class="container mt-8 px-56">
         <div class="flex flex-col lg:flex-row gap-8">
             <div class="w-full bg-white p-6 rounded-lg shadow-md">
-                <h2 class="text-2xl font-bold text-gray-900 mb-6">Pembayaran</h2>
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">Informasi Order</h2>
                 <h3>Total:</h3>
                 <h2 class="text-xl font-bold">Rp {{ number_format($order->total_price, 0, ',', '.') }}</h2>     
                         <div class="mt-6 border-t pt-6">
@@ -45,17 +45,12 @@
                                     <div class="flex items-center mb-4">
                                         <span class="inline-block w-3 h-3 rounded-full mr-2 
                                             @if($order->status == 'unpaid') bg-yellow-500
-                                            @elseif($order->status == 'waiting_pickup') bg-blue-500
-                                            @elseif($order->status == 'rented') bg-green-500
-                                            @elseif($order->status == 'returned') bg-red-500
+                                            @elseif($order->status == 'paid') bg-green-700
                                             @else bg-gray-500 @endif">
                                         </span>
                                         <span class="text-lg font-bold uppercase">
                                             @if($order->status == 'unpaid') Menunggu Pembayaran
-                                            @elseif($order->status == 'waiting_pickup') Menunggu Penjemputan
-                                            @elseif($order->status == 'rented') Sedang Disewa
-                                            @elseif($order->status == 'returned') Sudah Dikembalikan
-                                            @else Pesanan Selesai
+                                            @elseif($order->status == 'paid') Sudah Lunas
                                             @endif
                                         </span>
                                     </div>
@@ -108,7 +103,7 @@
                                             <p class="text-sm text-gray-500">{{$order->status == 'unpaid' ? 'Menunggu' : date('d M Y H:i', strtotime($order->updated_at)) }}</p>
                                         </div>
                                     </div>
-                                        @if($order->status == 'waiting_pickup' )
+                                        {{-- @if($order->status == 'waiting_pickup' )
                                         <div class="flex">
                                             <div class="flex flex-col items-center mr-4">
                                                 <div class="w-4 h-4 bg-yellow-400 rounded-full"></div>
@@ -116,9 +111,9 @@
                                             </div>
                                             <div>
                                                 <p class="font-medium">Menunggu Pengambilan</p>
-                                                {{-- <p class="text-sm text-gray-500">{{ $order->payment_confirmed_at ? date('d M Y H:i', strtotime($order->payment_confirmed_at)) : 'Menunggu' }}</p> --}}
+                                               
                                             </div>
-                                        </div>
+                                        </div> --}}
                                         {{-- <div class="flex">
                                             <div class="flex flex-col items-center mr-4">
                                                 <div class="w-4 h-4 {{ $order->status == 'processing' || $order->status == 'completed' ? 'bg-green-500' : 'bg-gray-300' }} rounded-full"></div>
@@ -129,7 +124,7 @@
                                                 <p class="text-sm text-gray-500">{{ $order->payment_confirmed_at ? date('d M Y H:i', strtotime($order->payment_confirmed_at)) : 'Menunggu' }}</p>
                                             </div>
                                         </div> --}}
-                                        @endif
+                                        {{-- @endif --}}
                                         @if($order->status == 'rented' || $order->status == 'returned')
                                         <div class="flex">
                                             <div class="flex flex-col items-center mr-4">
