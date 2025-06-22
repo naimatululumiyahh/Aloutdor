@@ -95,7 +95,7 @@
 
       <div class="mt-6 text-center text-sm font-poppins">
         <span class="text-blue-500 opacity-70">Belum punya akun?</span>
-        <a href="signup" class="text-red-400 font-bold ml-1">Daftar</a>
+        <a href="register" class="text-red-400 font-bold ml-1">Daftar</a>
       </div>
     </div>
 

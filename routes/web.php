@@ -8,6 +8,9 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProfileController;
 
+
+Route::get('/kategori/{id_kategori}', [BarangController::class, 'kategori'])->name('barang.kategori');
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -63,3 +66,5 @@ Route::middleware('auth')->group(function () {
         return redirect('/login');
     })->name('logout');
 });
+
+?>

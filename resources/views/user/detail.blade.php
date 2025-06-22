@@ -305,7 +305,7 @@
                             });
                         </script>
                         
-                        <button type="submit" class="bg-red-400 text-white px-8 py-3 rounded-lg hover:bg-red-500 w-full">Tambahkan ke cart</button>
+                        <button type="submit" class="bg-red-400 text-white px-8 py-3 rounded-lg hover:bg-red-500 w-full">Tambahkan ke keranjang</button>
                     </form>
 
                     {{-- <form action="{{ route('user.cart', ['cart_id' => 1, 'id_barang' => $barang->id]) }}" method="POST" class="w-full max-w-m rounded-xl space-y-6">

@@ -39,7 +39,7 @@
                 <a href="{{route('konten')}}" class="inline-block bg-yellow-500 text-white px-8 py-4 rounded-lg mt-8 font-lato font-medium hover:bg-yellow-600 shadow-lg">Yuk Sewa Sekarang!</a>
             </div>
             <div class="w-full lg:w-1/2">
-                <img src="https://placehold.co/740x752" alt="Camping Gear" class="w-full h-auto rounded-lg shadow-lg">
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="Camping Adventure" class="w-full h-auto rounded-lg shadow-lg">
             </div>
         </div>
     </section>
@@ -51,27 +51,27 @@
             <p class="text-lg text-center text-neutral-600 font-lato mb-12">Yuk lihat alat apa saja yang kita siapkan untuk mewujudkan experience kalian</p>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
                 <div class="bg-white p-6 rounded-3xl shadow-lg text-center">
-                    <img src="https://placehold.co/94x94" alt="Peralatan Berteduh" class="w-24 h-24 mx-auto mb-4">
+                    <img src="https://cdn.jsdelivr.net/npm/@tabler/icons@2.47.0/icons/tent.svg" alt="Peralatan Berteduh" class="w-24 h-24 mx-auto mb-4 object-contain">
                     <h3 class="text-xl font-semibold text-indigo-950 font-poppins">Peralatan Berteduh</h3>
                     <p class="text-sm text-gray-500 font-poppins mt-2">Tenda berbagai ukuran (2P, 4P, 6P, dll.), Sleeping bag, Matras camping, Hammock</p>
                 </div>
                 <div class="bg-white p-6 rounded-3xl shadow-lg text-center">
-                    <img src="https://placehold.co/76x76" alt="Peralatan Hiking" class="w-24 h-24 mx-auto mb-4">
+                    <img src="https://cdn.jsdelivr.net/npm/@tabler/icons@2.47.0/icons/mountain.svg" alt="Peralatan Hiking" class="w-24 h-24 mx-auto mb-4 object-contain">
                     <h3 class="text-xl font-semibold text-indigo-950 font-poppins">Peralatan Hiking</h3>
                     <p class="text-sm text-gray-500 font-poppins mt-2">Carrier berbagai ukuran, Daypack, Trekking pole, Jas hujan, Sarung tangan</p>
                 </div>
                 <div class="bg-white p-6 rounded-3xl shadow-lg text-center">
-                    <img src="https://placehold.co/83x83" alt="Peralatan Teknologi" class="w-24 h-24 mx-auto mb-4">
+                    <img src="https://cdn.jsdelivr.net/npm/@tabler/icons@2.47.0/icons/device-mobile-charging.svg" alt="Peralatan Teknologi" class="w-24 h-24 mx-auto mb-4 object-contain">
                     <h3 class="text-xl font-semibold text-indigo-950 font-poppins">Peralatan Teknologi</h3>
                     <p class="text-sm text-gray-500 font-poppins mt-2">Power bank solar, GPS / kompas digital, Kamera action (GoPro, dll.)</p>
                 </div>
                 <div class="bg-white p-6 rounded-3xl shadow-lg text-center">
-                    <img src="https://placehold.co/91x91" alt="Peralatan Survival" class="w-24 h-24 mx-auto mb-4">
+                    <img src="https://cdn.jsdelivr.net/npm/@tabler/icons@2.47.0/icons/accessible.svg" alt="Peralatan Survival" class="w-24 h-24 mx-auto mb-4 object-contain">
                     <h3 class="text-xl font-semibold text-indigo-950 font-poppins">Peralatan Survival</h3>
                     <p class="text-sm text-gray-500 font-poppins mt-2">Headlamp, senter, Pisau lipat, multitool, First aid kit, Whistle</p>
                 </div>
                 <div class="bg-white p-6 rounded-3xl shadow-lg text-center">
-                    <img src="https://placehold.co/79x79" alt="Peralatan Memasak" class="w-24 h-24 mx-auto mb-4">
+                    <img src="https://cdn.jsdelivr.net/npm/@tabler/icons@2.47.0/icons/pot.svg" alt="Peralatan Memasak" class="w-24 h-24 mx-auto mb-4 object-contain" onerror="this.onerror=null;this.src='https://cdn-icons-png.flaticon.com/512/1046/1046857.png';">
                     <h3 class="text-xl font-semibold text-indigo-950 font-poppins">Peralatan Memasak</h3>
                     <p class="text-sm text-gray-500 font-poppins mt-2">Kompor portable, Gas kaleng kecil, Nesting, Peralatan makan, Teko</p>
                 </div>
@@ -127,9 +127,9 @@
             <p class="text-lg text-center text-neutral-600 font-lato mb-12">Yuk intip review dari para penyewa!</p>
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 <div class="bg-white p-6 rounded-lg shadow-md">
-                    <p class="text-xl text-neutral-400 font-lato leading-normal">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque nam suscipit amet nec eget fermentum.</p>
+                    <p class="text-xl text-neutral-400 font-lato leading-normal">Pelayanan sangat ramah dan alat campingnya lengkap serta bersih. Proses sewa cepat, harga bersahabat. Sangat recommended untuk yang ingin camping tanpa ribet!</p>
                     <div class="flex items-center mt-6">
-                        <img src="https://placehold.co/75x75" alt="Melinda Lenny" class="w-20 h-20 rounded-full">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Melinda Lenny" class="w-20 h-20 rounded-full">
                         <div class="ml-4">
                             <p class="text-2xl text-neutral-500 font-lato">Melinda Lenny</p>
                             <p class="text-xl text-stone-300 font-lato">Medan</p>
@@ -137,9 +137,9 @@
                     </div>
                 </div>
                 <div class="bg-white p-6 rounded-lg shadow-md">
-                    <p class="text-xl text-neutral-400 font-lato leading-normal">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque nam suscipit amet nec eget fermentum.</p>
+                    <p class="text-xl text-neutral-400 font-lato leading-normal">Sewa alat camping di ALoutdor sangat memuaskan! Proses pemesanan mudah, alatnya lengkap dan bersih. Harga juga terjangkau, cocok untuk semua kalangan. Pasti akan sewa lagi untuk trip berikutnya!</p>
                     <div class="flex items-center mt-6">
-                        <img src="https://placehold.co/75x75" alt="Jacob Stevan" class="w-20 h-20 rounded-full">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Jacob Stevan" class="w-20 h-20 rounded-full">
                         <div class="ml-4">
                             <p class="text-2xl text-neutral-500 font-lato">Jacob Stevan</p>
                             <p class="text-xl text-stone-300 font-lato">Bandung</p>
@@ -147,9 +147,9 @@
                     </div>
                 </div>
                 <div class="bg-white p-6 rounded-lg shadow-md">
-                    <p class="text-xl text-neutral-400 font-lato leading-normal">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque nam suscipit amet nec eget fermentum.</p>
+                    <p class="text-xl text-neutral-400 font-lato leading-normal">Nyewa alat di sini gampang banget, alatnya lengkap dan bersih. Adminnya juga ramah, prosesnya cepat. Recommended banget buat yang mau camping tanpa ribet!</p>
                     <div class="flex items-center mt-6">
-                        <img src="https://placehold.co/75x75" alt="Roben Musstar" class="w-20 h-20 rounded-full">
+                        <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Roben Musstar" class="w-20 h-20 rounded-full">
                         <div class="ml-4">
                             <p class="text-2xl text-neutral-500 font-lato">Roben Musstar</p>
                             <p class="text-xl text-stone-300 font-lato">Bali</p>
@@ -157,9 +157,7 @@
                     </div>
                 </div>
             </div>
-            <div class="text-center mt-8">
-                <a href="testimoni.html" class="inline-block bg-red-400 text-white px-6 py-2 rounded hover:bg-red-500 font-lato">Lihat Semuanya</a>
-            </div>
+           
         </div>
     </section>
 
@@ -211,7 +209,16 @@
             </div>
             <div class="w-full lg:w-1/2">
                 <div class="bg-zinc-300 h-96 rounded-lg overflow-hidden relative">
-                    <img src="https://placehold.co/610x384" alt="Map" class="w-full h-full object-cover">
+                    <iframe
+                        src="https://www.google.com/maps?q=Jl.+Panglima+Sudirman+No.1-7,+Turen,+Malang,+Jawa+Timur+65175&output=embed"
+                        width="100%"
+                        height="100%"
+                        style="border:0;"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        class="w-full h-full absolute top-0 left-0"
+                    ></iframe>
                     <a href="#" class="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-red-400 text-white px-6 py-2 rounded font-lato hover:bg-red-500">Lihat Alamat di Sini</a>
                 </div>
             </div>
