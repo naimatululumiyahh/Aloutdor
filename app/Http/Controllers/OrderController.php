@@ -82,6 +82,7 @@ class OrderController extends Controller
         $invoiceCode = 'INV-' . now()->format('Ymd') . '-' . $payment->id . '-' . str_pad($index + 1, 2, '0', STR_PAD_LEFT);
         
         $item->invoice = $invoiceCode;
+        $item->status = 'waiting_pickup';
         $item->save();
     }
     // dd($payment);

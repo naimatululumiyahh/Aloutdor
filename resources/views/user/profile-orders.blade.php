@@ -37,7 +37,7 @@
                 <h2 class="text-3xl font-bold text-gray-900 mb-6">Profil</h2>
                 <ul class="space-y-4">
                     <li>
-                        <a href="profil.html" class="flex items-center space-x-2 text-lg font-bold text-black hover:bg-gray-100 p-2 rounded">
+                        <a href="{{route('profile.account')}}" class="flex items-center space-x-2 text-lg font-bold text-black hover:bg-gray-100 p-2 rounded">
                             <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                             </svg>
@@ -45,7 +45,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="sewaku.html" class="flex items-center space-x-2 text-lg font-bold text-black bg-red-400/10 p-2 rounded">
+                        <a href="{{route('profile.orders')}}" class="flex items-center space-x-2 text-lg font-bold text-black bg-red-400/10 p-2 rounded">
                             <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
                             </svg>
@@ -121,36 +121,21 @@
                                 </div>
                             </div>
                             <div class="mb-5">
-                            @if ($order->order->status == 'unpaid')
+                            @if ($order->status == 'unpaid')
                                 <a href="{{ route('order.show', $order->order_id) }}" class="mt-4 bg-gray-800 text-white px-6 py-2 rounded-xl hover:bg-gray-900 text-left inline-block">Bayar Sekarang <span class="text-xs block">Order ID: #{{$order->order_id}}</span></a>
                             @elseif ($order->status == 'waiting_pickup')
-                                <a href="{{ route('order.show', $order->order_id) }}" class="mt-4 bg-gray-800 text-white px-6 py-2 rounded-xl hover:bg-gray-900 inline-block">Lihat Informasi Order <span class="text-xs block">Order ID: #{{$order->order_id}}</span></a>
+                                <a href="{{ route('order.show', $order->order_id) }}" class="mt-4 bg-gray-800 text-white px-6 py-2 rounded-xl hover:bg-gray-900 inline-block">Info Order<span class="text-xs block">Order ID: #{{$order->order_id}}</span></a>
                                 <a href="" class="mt-4 bg-gray-800 text-white px-6 py-2 rounded-xl hover:bg-gray-900 inline-block">Invoice <span class="text-xs block">OrderItem ID: #{{$order->id}}</span></a>
+                            @elseif ($order->status == 'rented')
+                                <a href="{{ route('order.show', $order->order_id) }}" class="mt-4 bg-gray-800 text-white px-6 py-2 rounded-xl hover:bg-gray-900 inline-block">Info Order<span class="text-xs block">Order ID: #{{$order->order_id}}</span></a>
                             @elseif ($order->status == 'returned')
+                                <a href="{{ route('order.show', $order->order_id) }}" class="mt-4 bg-gray-800 text-white px-6 py-2 rounded-xl hover:bg-gray-900 inline-block">Info Order<span class="text-xs block">Order ID: #{{$order->order_id}}</span></a>
                                 <a href="" class="mt-4 bg-gray-800 text-white px-6 py-2 rounded-xl hover:bg-gray-900 inline-block">Review <span class="text-xs block">OrderItem ID: #{{$order->id}}</span></a>
                             @endif
                             </div>
                         </div>
                     @endforeach
-                    <div class="bg-white rounded-md shadow-lg p-4 flex items-end">
-                        <img src="https://placehold.co/154x155" alt="Tenda 7P" class="w-40 h-40 rounded-md mr-4">
-                        <div class="flex-1 self-start">
-                            <h3 class="text-xl font-extrabold text-black">Tenda 7P <span class="text-base font-medium text-black">(2 x 2 hari)</span></h3>
-                            {{-- <p class="text-base font-medium text-black">x2, 2 hari</p> --}}
-                            <div class="mt-2 flex items-center">
-                                <span class="bg-green-700 text-white text-sm font-semibold px-4 py-1 rounded-2xl">Dikembalikan</span>
-                            </div>
-                            <div class="mt-4">
-                                <p class="text-sm font-light text-gray-500 mt-2"><span class="text-xl font-semibold text-black">Rp 300.000</span></p>
-                                <p class="text-xs mt-4 font-medium text-black">Tanggal Sewa: <span class="font-extrabold text-red-600">12 April 2025</span></p>
-                            </div>
-                           
-                        </div>
-                        <div class="mb-5">
-                            
-                            <button class="mt-4 bg-gray-800 text-white px-6 py-2 rounded-xl hover:bg-gray-900">Lihat Detail</button>
-                        </div>
-                    </div>
+                    
                     {{-- <!-- Pesanan 2 -->
                     <div class="bg-white rounded-md shadow-lg p-4 flex items-start">
                         <img src="https://placehold.co/154x155" alt="Tenda 7P" class="w-40 h-40 rounded-md mr-4">
