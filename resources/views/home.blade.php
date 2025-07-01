@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SewaAja - ALoutdor</title>
+    <title>Aloutdor</title>
+    <link rel="icon" href="{{ asset('images/fav.png') }}" >
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Volkhov:wght@400;700&family=Lato:wght@400;700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body class="bg-gray-100 font-poppins">
     <!-- Navbar -->
     {{-- safdf --}}
-    <nav class="bg-white shadow-md p-4 fixed w-full z-10">
+    {{-- <nav class="bg-white shadow-md p-4 fixed w-full z-10">
         <div class="container mx-auto flex justify-between items-center">
             <div class="flex items-center space-x-4">
                 <h1 class="text-3xl font-bold text-red-400">AL<span class="text-gray-700">outdor</span></h1>
@@ -27,26 +28,28 @@
                 <a href="{{route('login')}}" class="bg-red-400 text-white px-4 py-2 rounded-full hover:bg-red-500">Masuk</a>
             </div>
         </div>
-    </nav>
+    </nav> --}}
+
+    @include('navbar')
 
     <!-- Hero Section -->
     <section class="pt-24 pb-16 bg-white">
-        <div class="container mx-auto flex flex-col lg:flex-row items-center gap-8 px-4">
+        <div class="container mx-auto flex flex-col lg:flex-row items-center gap-8 px-24">
             <div class="w-full lg:w-1/2">
                 <p class="text-xl font-bold text-red-400 uppercase font-lato">Ayo Sewa Peralatan Camping & Taklukkan Alam Bebas!</p>
                 <h1 class="text-5xl lg:text-6xl font-bold text-blue-900 font-volkhov leading-tight mt-4">Explore More, Worry Less – Petualangan Dimulai di Sini!</h1>
                 <p class="text-lg text-blue-900 font-lato leading-loose mt-6">Perjalanan seru dimulai dari perlengkapan yang tepat – semua alat camping tersedia, tinggal berangkat!</p>
                 <a href="{{route('konten')}}" class="inline-block bg-yellow-500 text-white px-8 py-4 rounded-lg mt-8 font-lato font-medium hover:bg-yellow-600 shadow-lg">Yuk Sewa Sekarang!</a>
             </div>
-            <div class="w-full lg:w-1/2">
-                <img src="https://placehold.co/740x752" alt="Camping Gear" class="w-full h-auto rounded-lg shadow-lg">
+            <div class="w-2/5 lg:w-2/5">
+                <img src="{{ asset('images/home/hero.png') }}" alt="Camping Gear" class="w-full h-auto rounded-lg shadow-lg">
             </div>
         </div>
     </section>
 
     <!-- Kategori Produk -->
     <section id="produk" class="produk py-16 bg-gray-100">
-        <div class="container mx-auto px-4">
+        <div class="container mx-auto px-24">
             <h2 class="text-4xl font-bold text-center text-neutral-600 font-volkhov mb-4">Ada apa aja sih di <span class="text-red-400">AL</span><span class="text-blue-900">outdor</span>?</h2>
             <p class="text-lg text-center text-neutral-600 font-lato mb-12">Yuk lihat alat apa saja yang kita siapkan untuk mewujudkan experience kalian</p>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
@@ -81,7 +84,7 @@
 
     <!-- Keunggulan -->
     <section class="py-16 bg-white">
-        <div class="container mx-auto px-4">
+        <div class="container mx-auto px-24">
             <h2 class="text-4xl font-bold text-center text-neutral-600 font-volkhov mb-4">Kenapa harus <span class="text-red-400">AL</span><span class="text-blue-900">outdor</span>?</h2>
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-12">
                 <div class="bg-white p-6 rounded-lg border border-neutral-300 flex items-start space-x-4">
@@ -122,7 +125,7 @@
 
     <!-- Testimoni -->
     <section class="py-16 bg-gray-100">
-        <div class="container mx-auto px-4">
+        <div class="container mx-auto px-24">
             <h2 class="text-4xl font-bold text-center text-neutral-600 font-volkhov mb-4">Apa yang mereka katakan tentang <span class="text-red-400">AL</span><span class="text-blue-900">outdor</span>?</h2>
             <p class="text-lg text-center text-neutral-600 font-lato mb-12">Yuk intip review dari para penyewa!</p>
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -165,7 +168,7 @@
 
     <!-- Kontak -->
     <section class="py-16 bg-white">
-        <div class="container mx-auto px-4 flex flex-col lg:flex-row gap-8">
+        <div class="container mx-auto px-24 flex flex-col lg:flex-row gap-8">
             <div class="w-full lg:w-1/2">
                 <h2 class="text-5xl font-normal text-neutral-500 font-volkhov mb-6">Kontak Kami</h2>
                 <p class="text-base text-neutral-400 font-poppins mb-8">Jika Anda membutuhkan konsultasi dengan kami, Anda dapat mengirim pesan atau menghubungi kami. Kami akan merespons secepat mungkin.</p>

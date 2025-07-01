@@ -1,11 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SewaAja - Pesanan Saya</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-</head>
+    @include('head')
 <body class="bg-gray-100 font-poppins">
     <!-- Navbar -->
     <nav class="bg-white shadow-md p-4">
@@ -66,9 +61,7 @@
                             <option>Dikembalikan</option>
                             <option>Dipinjam</option>
                         </select>
-                        <svg class="w-4 h-4 absolute right-2 top-3 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                        </svg>
+                        
                     </div>
                 </div>
                 <div class="space-y-6">
@@ -125,7 +118,7 @@
                                 <a href="{{ route('order.show', $order->order_id) }}" class="mt-4 bg-gray-800 text-white px-6 py-2 rounded-xl hover:bg-gray-900 text-left inline-block">Bayar Sekarang <span class="text-xs block">Order ID: #{{$order->order_id}}</span></a>
                             @elseif ($order->status == 'waiting_pickup')
                                 <a href="{{ route('order.show', $order->order_id) }}" class="mt-4 bg-gray-800 text-white px-6 py-2 rounded-xl hover:bg-gray-900 inline-block">Info Order<span class="text-xs block">Order ID: #{{$order->order_id}}</span></a>
-                                <a href="" class="mt-4 bg-gray-800 text-white px-6 py-2 rounded-xl hover:bg-gray-900 inline-block">Invoice <span class="text-xs block">OrderItem ID: #{{$order->id}}</span></a>
+                                <a href="{{ route('order.invoice', [$order->order_id, $order->id])}}" class="mt-4 bg-gray-800 text-white px-6 py-2 rounded-xl hover:bg-gray-900 inline-block">Invoice <span class="text-xs block">OrderItem ID: #{{$order->id}}</span></a>
                             @elseif ($order->status == 'rented')
                                 <a href="{{ route('order.show', $order->order_id) }}" class="mt-4 bg-gray-800 text-white px-6 py-2 rounded-xl hover:bg-gray-900 inline-block">Info Order<span class="text-xs block">Order ID: #{{$order->order_id}}</span></a>
                             @elseif ($order->status == 'returned')

@@ -4,13 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Jaminan extends Model
+class Category extends Model
 {
-    protected $table = 'tipe_jaminan';
+    protected $table = 'category';
 
     protected $fillable = [
-        'tipe'
+        'nama'
     ];
 
     public $timestamps = false;
+
 }

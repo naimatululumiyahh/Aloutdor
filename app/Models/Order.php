@@ -22,6 +22,11 @@ class Order extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function jaminan()
+    {
+        return $this->belongsTo(Jaminan::class, 'tipe_jaminan', 'id');
+    }
+
     public function cart()
     {
         return $this->belongsTo(Cart::class);

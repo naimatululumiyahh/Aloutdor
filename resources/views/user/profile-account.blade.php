@@ -1,11 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SewaAja - Profil</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-</head>
+    @include('head')
 <body class="bg-gray-100 font-poppins">
    @include('navbar')
     <!-- Main Content: Profil -->

@@ -1,11 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SewaAja - Daftar Barang Sewa</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-</head>
+@include('head')
 <body class="bg-gray-100 font-poppins">
  
 @include('navbar')
@@ -84,7 +79,7 @@
                                 <img src="{{ asset('images/barang/' . $gambarPertama) }}" alt="{{ $barang->nama_barang }}" class="w-full h-64 object-cover rounded-lg">
                                 <div class="mt-4">
                                     <h3 class="text-xl font-bold">{{ $barang->nama_barang }}</h3>
-                                    <p class="text-red-400 font-semibold">Rp {{ number_format($barang->harga_per_hari) }}</p>
+                                    <p class="text-red-400 font-semibold">Rp {{ number_format($barang->harga_per_hari) }}<span class="text-black font-normal text-sm"> /hari</span></p>
                                     {{-- <div class="block mt-2 bg-red-400 text-white text-center py-2 rounded hover:bg-red-500">Sewa</div> --}}
                                 </div>
                             </div>
