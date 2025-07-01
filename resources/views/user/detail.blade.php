@@ -271,7 +271,7 @@
                         <input type="number" name="subtotal" id="subtotal" value="{{ $barang->harga_per_hari }}" hidden>
                         <script>
                             document.addEventListener('DOMContentLoaded', function() {
-                                const pricePerDay = {{ $barang->harga_per_hari }};
+                                const pricePerDay = @json($barang->harga_per_hari);
                                 const subtotalInput = document.getElementById('subtotal');
                                 const qtyInput = document.querySelector('input[name="qty"]');
                                 const startDateInput = document.getElementById('startDate');
