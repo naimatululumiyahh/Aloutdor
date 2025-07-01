@@ -10,4 +10,11 @@ class Barang extends Model
     
     // Jika tidak pakai kolom created_at dan updated_at:
     public $timestamps = false;
+
+
+    
+    public function barang()
+    {
+        return $this->belongsTo(Barang::class, 'id_barang', 'id');
+    }
 }

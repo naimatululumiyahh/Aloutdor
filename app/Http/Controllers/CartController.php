@@ -26,6 +26,7 @@ class CartController extends Controller
         $items = CartItem::with('barang')->where('cart_id', $cart->id)->get();
 
         // dd($items);
+        // dd($items);
         
         return view('user.cart', ['items' => $items]);
     }

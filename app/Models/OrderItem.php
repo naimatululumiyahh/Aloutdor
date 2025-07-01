@@ -16,6 +16,7 @@ class OrderItem extends Model
         'quantity',
         'invoice',
         'subtotal',
+        'status',
     ];
 
     public $timestamps = false;

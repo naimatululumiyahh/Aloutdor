@@ -7,12 +7,14 @@
 </head>
 <body>
 
-<nav class="bg-white shadow-md p-4">
+<nav class="bg-white shadow-md p-4 px-24 ">
     <div class="container mx-auto flex justify-between items-center">
         <!-- Logo -->
-        <a href="{{ route('konten') }}">
+        {{-- <div class="flex items-center space-x-4"> --}}
+        <a href="{{ route('home') }}">
             <h1 class="text-3xl font-bold text-red-400">AL<span class="text-gray-700">outdor</span></h1>
         </a>
+        
 
         <!-- Search (centered) -->
         <div class="flex-1 flex justify-center">
@@ -30,7 +32,7 @@
 
         <!-- Nav Links & Profile Dropdown -->
         <div class="flex items-center space-x-4 relative ml-4">
-            <a href="{{ route('konten') }}" class="text-gray-700 hover:text-red-400 font-semibold">Beranda</a>
+            <a href="{{ route('konten') }}" class="text-gray-700 hover:text-red-400 font-semibold">Jelajahi</a>
             <a href="{{ route('cart') }}" class="text-gray-700 hover:text-red-400 font-semibold">Keranjang</a>
 
             <!-- Profile Dropdown -->

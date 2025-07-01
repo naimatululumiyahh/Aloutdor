@@ -8,6 +8,7 @@ use App\Models\Cart;
 use App\Models\CartItem;
 use App\Models\OrderItem;
 use Illuminate\Support\Str;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -45,6 +46,7 @@ class OrderController extends Controller
                 'quantity' => $item->qty,
                 'invoice' => '',
                 'subtotal' => $item->subtotal,
+                'status' => 'unpaid',
             ]);
         }
 
@@ -72,7 +74,7 @@ class OrderController extends Controller
     public function simulatePay(Request $request, $code)
 {
     $payment = Order::where('code', $code)->firstOrFail();
-    $payment->status = 'waiting_pickup';
+    $payment->status = 'paid';
     $payment->save();
 
     $orderItems = OrderItem::where('order_id', $payment->id)->get();
@@ -81,6 +83,7 @@ class OrderController extends Controller
         $invoiceCode = 'INV-' . now()->format('Ymd') . '-' . $payment->id . '-' . str_pad($index + 1, 2, '0', STR_PAD_LEFT);
         
         $item->invoice = $invoiceCode;
+        $item->status = 'waiting_pickup';
         $item->save();
     }
     // dd($payment);
@@ -89,9 +92,21 @@ class OrderController extends Controller
 
     public function showInvoice($order_id, $id)
     {
-        $order = Order::findOrFail($order_id);
-        $item = OrderItem::findOrFail($id);
+        // $order = Order::with('jaminan')->findOrFail($order_id);
+        // $item = OrderItem::with('barang')->findOrFail($id);
 
-        return view('user.invoice', compact('order', 'item'));
+        $item = OrderItem::with(['order.user', 'barang', 'order.jaminan'])->findOrFail($id);
+        $order = $item->order;
+
+        $pdf = Pdf::loadView('user.blade-pdf', compact('item', 'order'));
+
+        // dd($item);
+        // $items = CartItem::with('barang')->where('cart_id', $cart->id)->get();
+        // $pdf = Pdf::loadView('invoice.template', compact('orderItem'));
+        // return $pdf->download('Invoice-' . $item->invoice . '.pdf');
+        // return view('user.invoice', compact('order', 'item'));
+        // return $pdf->download('Invoice-' . $item->invoice . '.pdf');
+        return $pdf->stream('Invoice-' . $item->invoice . '.pdf');
+
     }
 }
