@@ -34,7 +34,7 @@
             @endphp
             
             <select class="border border-gray-300 rounded p-1" 
-            onchange="window.location.href='{{<?= route('barang.kategori', ['id_kategori' => $currentKategori]) ?>}}?sort=' + this.value;"> <!--diilangin phpnya malah merah-->
+            onchange="window.location.href='{{ route('barang.kategori', ['id_kategori' => $currentKategori])}}?sort=' + this.value;"> <!--diilangin phpnya malah merah-->
                 <option value="relevansi" {{ isset($sort) && $sort === 'relevansi' ? 'selected' : '' }}>Relevansi</option>
                 <option value="low_to_high" {{ isset($sort) && $sort === 'low_to_high' ? 'selected' : '' }}>Harga: Rendah ke Tinggi</option>
                 <option value="high_to_low" {{ isset($sort) && $sort === 'high_to_low' ? 'selected' : '' }}>Harga: Tinggi ke Rendah</option>
